@@ -1,0 +1,102 @@
+<html>
+<head>
+	<title></title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+	<script>
+        var mod = angular.module('myapp',[])
+            mod.controller('MyController',['$scope', '$http', function ($scope, $http) {
+	            
+	            $http.get('profile.json').success(function(data){
+
+	                $scope.full_name = data.full_name;
+	                $scope.position = data.position;
+	                $scope.industry = data.industry;
+	                $scope.current = data.current;
+	                $scope.previous = data.previous;
+	                $scope.education = data.education;
+	                $scope.profile_action = data.profile_action;
+
+	            });
+
+	            $http.get('summary.json').success(function(data){
+	               $scope.summary_content = data.content; 
+	            });
+
+	            $http.get('experience.json').success(function(data){
+	               $scope.experian_content = data.content; 
+	            });
+
+	            $http.get('project.json').success(function(data){
+	               $scope.project_content = data.content; 
+	            });
+
+	            $http.get('skills.json').success(function(data){
+	               $scope.skills_content = data.content; 
+	            });
+
+	            $http.get('education.json').success(function(data){
+	               $scope.education_content = data.content; 
+	            });
+            }]);  
+        </script>
+</head>
+<body ng-app="myapp" ng-controller="MyController">
+<div class="container">
+
+	<div class="coverphoto">
+	</div> <!-- End coverphoto -->
+
+	<div class="base-info">
+		
+		<div id="profile-picture">			
+		</div> <!--End profile-picture -->
+
+		<div id="info">
+			<span class="full-name"> {{full_name}} <br/></span>
+			<p class="title"> {{position}} </p>
+			<p class="industry"> {{industry}} </p>
+
+			<div class="job">
+            	<p>Current: {{current}}<br/>
+            	Previous: {{previous}}<br/>
+            	Education: {{education}}<br/></p>
+        	</div> <!-- End job -->
+
+		</div> <!-- End base-info -->
+
+		<div class="profile-action">
+			{{profile_action}}
+		</div> <!-- End profile-action-->
+	</div>
+	
+
+	<!-- Back ground -->
+	<div class="background">
+		<h2>Background</h2><br/><br/><br/><br/>
+			
+        <h3>Summary</h3>
+        <p>{{summary_content}}</p><br/>
+        <p class="border"></p><br/>    
+    
+        <h3>Experience</h3>
+        <p>{{experian_content}}</p><br/>
+        <p class="border"></p><br/>
+    
+        <h3>Project</h3>
+        <p>{{project_content}}</p><br/>
+        <p class="border"></p><br/>
+       
+        <h3>Skills</h3>
+        <p>{{skills_content}}</p><br/>
+        <p class="border"></p><br/>
+      
+        <h3>Education</h3>
+        <p>{{education_content}}</p><br/>
+        <p class="border"></p><br/>
+            
+	</div>
+</div> <!--End container -->
+</body>
+</html>
